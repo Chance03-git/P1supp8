@@ -1,3 +1,24 @@
+import requests
+
+def send_get_request(url):
+    try:
+        # Send the GET request
+        response = requests.get(url)
+
+        # Check for client error status codes (400-499)
+        if 400 <= response.status_code <= 499:
+            raise Exception(f"Client error: {response.status_code} - {response.reason}")
+
+        # Handle JSON response
+        if response.headers.get("Content-Type", "").startswith("application/json"):
+            return response.status_code, response.json()
+
+        # Return plain text response
+        return response.status_code, response.text
+
+    except requests.exceptions.RequestException as e:
+        raise Exception(f"An error occurred while sending the GET request: {e}")
+
 def test_send_get_request():
     # Test with a valid URL returning JSON
     url = "https://jsonplaceholder.typicode.com/posts/1"
