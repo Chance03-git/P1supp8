@@ -90,3 +90,13 @@ def test_fetch_postman_token_and_ip():
     assert ip_address != "Not found"
 
     print("Test passed: Postman-Token and IP address retrieved successfully.")
+def test_send_post_request():
+    status_code, response_json = send_post_request()
+
+    # Assert the status code is 200 (OK)
+    assert status_code == 200
+
+    # Assert the response contains the sent payload
+    assert response_json.get("hello") == "world"
+
+    print("Test passed: POST request sent and response verified successfully.")
