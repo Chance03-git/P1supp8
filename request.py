@@ -63,10 +63,21 @@ def fetch_postman_token_and_ip():
     except ValueError:
         raise Exception("Failed to parse response as JSON.")
 def send_post_request():
-     url = "https://echo.free.beeceptor.com"
-     payload = {"hello": "world"}
+    """
+    Sends a POST request to https://echo.free.beeceptor.com with a JSON payload.
 
-     try:
+    The payload contains a key of "hello" and a value of "world".
+
+    Returns:
+        tuple: A tuple containing the status code and the response JSON.
+
+    Raises:
+        Exception: If the request fails or the response is not in JSON format.
+    """
+    url = "https://echo.free.beeceptor.com"
+    payload = {"hello": "world"}
+
+    try:
         # Send the POST request with JSON payload
         response = requests.post(url, json=payload)
 
@@ -76,9 +87,9 @@ def send_post_request():
         # Return the status code and response JSON
         return response.status_code, response.json()
 
-     except requests.exceptions.RequestException as e:
+    except requests.exceptions.RequestException as e:
         raise Exception(f"An error occurred while sending the POST request: {e}")
-     except ValueError:
+    except ValueError:
         raise Exception("Failed to parse response as JSON.")
 def test_send_get_request():
     # Test with a valid URL returning JSON
