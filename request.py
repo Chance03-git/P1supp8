@@ -31,6 +31,28 @@ def send_get_request(url):
     except requests.exceptions.RequestException as e:
         raise Exception(f"An error occurred while sending the GET request: {e}")
 
+def fetch_postman_token_and_ip():
+    url = "https://echo.free.beeceptor.com"
+    try:
+        response = requests.get(url)
+
+        # Check for successful response
+        response.raise_for_status()
+
+        # Extract Postman-Token from headers
+        postman_token = response.headers.get("Postman-Token", "Not found")
+
+        # Extract IP address from the response JSON
+        response_data = response.json()
+        ip_address = response_data.get("ip", "Not found")
+
+        return postman_token, ip_address
+
+    except requests.exceptions.RequestException as e:
+        raise Exception(f"An error occurred while sending the GET request: {e}")
+    except ValueError:
+        raise Exception("Failed to parse response as JSON.")
+
 def test_send_get_request():
     # Test with a valid URL returning JSON
     url = "https://jsonplaceholder.typicode.com/posts/1"
