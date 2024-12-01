@@ -32,6 +32,16 @@ def send_get_request(url):
         raise Exception(f"An error occurred while sending the GET request: {e}")
 
 def fetch_postman_token_and_ip():
+    """
+    Sends a GET request to https://echo.free.beeceptor.com and retrieves the 
+    Postman-Token from the headers and IP address from the response body.
+
+    Returns:
+        tuple: A tuple containing the Postman-Token and the IP address.
+
+    Raises:
+        Exception: If the request fails or required keys are missing.
+    """
     url = "https://echo.free.beeceptor.com"
     try:
         response = requests.get(url)
