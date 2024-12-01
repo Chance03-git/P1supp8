@@ -50,3 +50,11 @@ def test_send_get_request():
         send_get_request(url)
     except Exception as e:
         assert "Client error" in str(e)
+def test_fetch_postman_token_and_ip():
+    postman_token, ip_address = fetch_postman_token_and_ip()
+
+    # Assert Postman-Token and IP address are not empty
+    assert postman_token != "Not found"
+    assert ip_address != "Not found"
+
+    print("Test passed: Postman-Token and IP address retrieved successfully.")
