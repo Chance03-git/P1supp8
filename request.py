@@ -1,6 +1,18 @@
 import requests
 
 def send_get_request(url):
+    """
+    Sends an HTTP GET request to the specified URL.
+
+    Args:
+        url (str): The URL to send the GET request to.
+
+    Returns:
+        tuple: A tuple containing the status code and the response text or dictionary.
+
+    Raises:
+        Exception: If the status code is in the range 400-499 (inclusive).
+    """
     try:
         # Send the GET request
         response = requests.get(url)
